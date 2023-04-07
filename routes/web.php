@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\CategoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,18 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('marca/carregarTabela', 'App\Http\Controllers\MarcaController@carregarTabela')->name('marca.tabela');
+// ------------------------- MARCA -------------------------
 
-Route::Resource('marca', 'App\Http\Controllers\MarcaController');
+Route::get('marca/carregarTabela', [MarcaController::class, 'carregarTabela'])->name('marca.tabela');
+
+Route::Resource('marca', MarcaController::class)->except([
+    'create', 'edit'
+]);
+
+// ------------------------- Categoria -------------------------
+
+Route::get('categoria/carregarTabela', [CategoriaController::class, 'carregarTabela'])->name('categoria.tabela');
+
+Route::Resource('categoria', CategoriaController::class)->except([
+    'create', 'edit'
+]);;

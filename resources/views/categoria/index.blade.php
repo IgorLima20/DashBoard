@@ -4,15 +4,15 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Lista de Marcas</h4>
+                <h4 class="card-title">Lista de Categorias</h4>
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalMarcaCreate">Nova
-                            Marca</button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalCategoriaCreate">Nova
+                            Categoria</button>
                     </div>
                     <div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="inpMarcaPesq" placeholder="Pesquisar por Marca">
+                            <input type="text" class="form-control" id="inpCategoriaPesq" placeholder="Pesquisar por Categoria">
                             <div class="input-group-append">
                                 <button onclick="filtrar()" class="btn btn-outline-primary" type="button" id="button-addon2">Pesquisar</button>
                             </div>
@@ -23,11 +23,11 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Marca</th>
+                            <th>Categoria</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="gridMarcaBody">
+                    <tbody id="gridCategoriaBody">
                     </tbody>
                 </table>
 
@@ -40,23 +40,23 @@
     </div>
 
     <!-- Modal Create -->
-    <div class="modal fade" id="modalMarcaCreate" tabindex="-1" role="dialog" aria-labelledby="modalMarcaLabel"
+    <div class="modal fade" id="modalCategoriaCreate" tabindex="-1" role="dialog" aria-labelledby="modalCategoiraLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="formMarcaCreate" class="forms-sample">
+                <form id="formCategoriaCreate" class="forms-sample">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalMarcaLabel">Adicionar Marca</h5>
+                        <h5 class="modal-title" id="modalCategoiraLabel">Adicionar Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Marca</label>
-                            <input type="text" class="form-control" id="idMarca" name="marca"
-                                placeholder="Nome da Marca">
+                            <label>Categoria</label>
+                            <input type="text" class="form-control" id="idCategoria" name="categoria"
+                                placeholder="Nome da Categoria">
                         </div>
                         <div class="form-group">
                             <label>Imagem</label>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Cadastrar Marca</button>
+                        <button type="submit" class="btn btn-primary">Cadastrar Categoria</button>
                     </div>
                 </form>
             </div>
@@ -87,14 +87,14 @@
     </div>
 
     <!-- Modal Edit -->
-    <div class="modal fade" id="modalMarcaEdit" tabindex="-1" role="dialog" aria-labelledby="modalMarcaEditLabel"
+    <div class="modal fade" id="modalCategoriaEdit" tabindex="-1" role="dialog" aria-labelledby="modalCategoriaEditLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="formMarcaEdit" class="forms-sample">
+                <form id="formCategoriaEdit" class="forms-sample">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalMarcaEditLabel">Editar Marca</h5>
+                        <h5 class="modal-title" id="modalCategoriaEditLabel">Editar Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -102,9 +102,9 @@
                     <input type="hidden" id="idEdit">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Marca</label>
-                            <input type="text" class="form-control" id="idMarcaEdit" name="marca"
-                                placeholder="Nome da Marca">
+                            <label>Categoria</label>
+                            <input type="text" class="form-control" id="idCategoriaEdit" name="categoria"
+                                placeholder="Nome da Categoria">
                         </div>
                         <div class="form-group">
                             <label>Imagem</label>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Editar Marca</button>
+                        <button type="submit" class="btn btn-primary">Editar Categoria</button>
                     </div>
                 </form>
             </div>
@@ -135,11 +135,11 @@
     </div>
 
     <!-- Modal Show -->
-    <div class="modal fade" id="modalMarcaShow" tabindex="-1" role="dialog" aria-labelledby="modalMarcaShowLabel"
+    <div class="modal fade" id="modalCategoriaShow" tabindex="-1" role="dialog" aria-labelledby="modalCategoriaShowLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="formMarcaEdit" class="forms-sample">
+                <form class="forms-sample">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -147,8 +147,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Marca</label>
-                            <input type="text" class="form-control" id="idMarcaShow" value="" disabled>
+                            <label>Categoria</label>
+                            <input type="text" class="form-control" id="idCategoriaShow" value="" disabled>
                         </div>
                         <div class="form-group">
                             <div class="col-12 mt-2 text-center">
@@ -202,15 +202,15 @@
 
         function AbreModalEditar(id) {
             let request = new XMLHttpRequest();
-            request.open('GET', 'http://127.0.0.1:8000/marca/' + id);
+            request.open('GET', 'http://127.0.0.1:8000/categoria/' + id);
             request.onload = function() {
                 if (request.status === 200) {
                     $('.loading').hide();
                     let response = JSON.parse(request.responseText);
-                    document.getElementById('idEdit').value = response.marca.id;
-                    document.getElementById('idMarcaEdit').value = response.marca.marca;
-                    document.getElementById('PreviewImageEdit').src = '/storage/' + response.marca.imagem;
-                    $('#modalMarcaEdit').modal('show');
+                    document.getElementById('idEdit').value = response.categoria.id;
+                    document.getElementById('idCategoriaEdit').value = response.categoria.categoria;
+                    document.getElementById('PreviewImageEdit').src = '/storage/' + response.categoria.imagem;
+                    $('#modalCategoriaEdit').modal('show');
                 } else {
                     $('.loading').hide();
                     Swal.fire('Erro', 'Falha para carregar marca', 'error');
@@ -226,15 +226,15 @@
 
         function AbreModalShow(id) {
             let request = new XMLHttpRequest();
-            request.open('GET', 'http://127.0.0.1:8000/marca/' + id);
+            request.open('GET', 'http://127.0.0.1:8000/categoria/' + id);
             request.setRequestHeader('Accept', 'application/json');
             request.onload = function() {
                 if (request.status === 200) {
                     $('.loading').hide();
                     let response = JSON.parse(request.responseText);
-                    document.getElementById('idMarcaShow').value = response.marca.marca;
-                    document.getElementById('PreviewImageShow').src = '/storage/' + response.marca.imagem;
-                    $('#modalMarcaShow').modal('show');
+                    document.getElementById('idCategoriaShow').value = response.categoria.categoria;
+                    document.getElementById('PreviewImageShow').src = '/storage/' + response.categoria.imagem;
+                    $('#modalCategoriaShow').modal('show');
                 } else {
                     $('.loading').hide();
                     Swal.fire('Erro', 'Falha para carregar marca', 'error');
@@ -248,11 +248,11 @@
             request.send();
         }
 
-        document.getElementById('formMarcaCreate').addEventListener('submit', function(e) {
+        document.getElementById('formCategoriaCreate').addEventListener('submit', function(e) {
             e.preventDefault();
-            let form = new FormData(document.getElementById('formMarcaCreate'));
+            let form = new FormData(document.getElementById('formCategoriaCreate'));
             let request = new XMLHttpRequest();
-            request.open('POST', 'http://127.0.0.1:8000/marca');
+            request.open('POST', 'http://127.0.0.1:8000/categoria');
             request.setRequestHeader('Accept', 'application/json');
             request.onload = function() {
                 if (request.status === 201) {
@@ -273,17 +273,17 @@
                 $('.loading').hide();
                 Swal.fire('Erro', e, 'error');
             };
-            $('#modalMarcaCreate').modal('hide');
+            $('#modalCategoriaCreate').modal('hide');
             $('.loading').show();
             request.send(form);
         });
 
-        document.getElementById('formMarcaEdit').addEventListener('submit', function(e) {
+        document.getElementById('formCategoriaEdit').addEventListener('submit', function(e) {
             e.preventDefault();
-            let form = new FormData(document.getElementById('formMarcaEdit'));
+            let form = new FormData(document.getElementById('formCategoriaEdit'));
             form.append('_method', 'PATCH');
             let request = new XMLHttpRequest();
-            request.open('POST', 'http://127.0.0.1:8000/marca/' + document.getElementById('idEdit').value);
+            request.open('POST', 'http://127.0.0.1:8000/categoria/' + document.getElementById('idEdit').value);
             request.onload = function() {
                 if (request.status === 200) {
                     $('.loading').hide();
@@ -303,14 +303,14 @@
                 $('.loading').hide();
                 Swal.fire('Erro', e, 'error');
             };
-            $('#modalMarcaEdit').modal('hide');
+            $('#modalCategoriaEdit').modal('hide');
             $('.loading').show();
             request.send(form);
         });
 
-        function deleteMarca(id) {
+        function deleteCategoria(id) {
             Swal.fire({
-                title: 'Deseja realmente excluir essa Marca ?',
+                title: 'Deseja realmente excluir essa Categoria ?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Sim',
@@ -321,7 +321,7 @@
                     form.append('_token', document.getElementsByName('_token')[0].value);
                     form.append('_method', 'DELETE');
                     let request = new XMLHttpRequest();
-                    request.open('POST', 'http://127.0.0.1:8000/marca/' + id);
+                    request.open('POST', 'http://127.0.0.1:8000/categoria/' + id);
                     request.onload = function() {
                         if (request.status === 200) {
                             $('.loading').hide();
@@ -346,20 +346,20 @@
 
         function CarregarTabela(url) {
             let request = new XMLHttpRequest();
-            let route = url ? url : '{{ Route('marca.tabela') }}';
+            let route = url ? url : '{{ Route('categoria.tabela') }}';
             request.open('GET', route);
             request.setRequestHeader('Accept', 'application/json');
             request.onload = function() {
                 if (request.status === 200) {
-                    let dataMarca = JSON.parse(request.responseText);
-                    let divTable = document.getElementById('gridMarcaBody');
+                    let dataCategoria = JSON.parse(request.responseText);
+                    let divTable = document.getElementById('gridCategoriaBody');
                     let divPaginate = document.getElementById('paginate');
                     let table = '';
                     let paginate = '';
-                    for (let data of dataMarca.marca.data) {
+                    for (let data of dataCategoria.categoria.data) {
                         table += '<tr>';
                         table += '<td>' + data.id + '</td>';
-                        table += '<td>' + data.marca + '</td>';
+                        table += '<td>' + data.categoria + '</td>';
                         table += '<td>';
                         table += '<button onclick="AbreModalEditar(' + data.id +
                             ')" class="btn btn-sm btn-primary" type="button">';
@@ -369,35 +369,35 @@
                             ')" class="btn btn-sm btn-secondary" type="button">';
                         table += '<i class="mdi mdi-format-list-bulleted" style="font-size: 14px;"></i>';
                         table += '</button> ';
-                        table += '<button onclick="deleteMarca(' + data.id + ')" class="btn btn-sm btn-danger">';
+                        table += '<button onclick="deleteCategoria(' + data.id + ')" class="btn btn-sm btn-danger">';
                         table += '<i class="mdi mdi-delete-sweep" style="font-size: 14px;"></i>';
                         table += '</button>';
                         table += '</td>';
                         table += '</tr>';
                     }
 
-                    let search = dataMarca.search;
+                    let search = dataCategoria.search;
                     let perPage = 'disabled';
                     let prevUrl = '';
                     let currentPage = '';
                     let url = '';
                     let lastUrl = '';
                     let lastPage = 'disabled';
-                    if (dataMarca.marca.prev_page_url) {
+                    if (dataCategoria.categoria.prev_page_url) {
                         perPage = '';
-                        prevUrl = "'" + dataMarca.marca.prev_page_url + '&search=' + search + "'";
+                        prevUrl = "'" + dataCategoria.categoria.prev_page_url + '&search=' + search + "'";
 
                     }
-                    if (dataMarca.marca.next_page_url) {
+                    if (dataCategoria.categoria.next_page_url) {
                         lastPage = '';
-                        lastUrl = "'" + dataMarca.marca.next_page_url + '&search=' + search + "'";
+                        lastUrl = "'" + dataCategoria.categoria.next_page_url + '&search=' + search + "'";
                     }
                     paginate += '<li class="page-item ' + perPage + '">';
                     paginate += '<button class="page-link" onclick="CarregarTabela(' + prevUrl + ')">Previous</button>';
                     paginate += '</li>';
-                    for (let i = 1; i <= dataMarca.marca.links; i++) {
-                        currentPage = dataMarca.marca.to == i ? 'active' : '';
-                        url = "'" + dataMarca.marca.links[i].url + "'";
+                    for (let i = 1; i <= dataCategoria.categoria.links; i++) {
+                        currentPage = dataCategoria.categoria.to == i ? 'active' : '';
+                        url = "'" + dataCategoria.categoria.links[i].url + "'";
                         paginate += '<li class="page-item ' + currentPage + '">';
                         paginate += '<button class="page-link" onclick="CarregarTabela(' + url + '&search=' + search +
                             ')">' + i +
@@ -421,26 +421,26 @@
         };
 
         function filtrar() {
-            let url = '{{ Route('marca.tabela') }}' + '?search=' + document.getElementById('inpMarcaPesq').value;
+            let url = '{{ Route('categoria.tabela') }}' + '?search=' + document.getElementById('inpCategoriaPesq').value;
             CarregarTabela(url);
         }
 
-        $('#modalMarcaCreate').on('hide.bs.modal', function(event) {
-            document.getElementById('idMarca').value = '';
+        $('#modalCategoriaCreate').on('hide.bs.modal', function(event) {
+            document.getElementById('idCategoria').value = '';
             document.getElementById('labelImagem').innerHTML = '';
             document.getElementById('arquivo').value = '';
             document.getElementById('PreviewImage').src = '';
         })
 
-        $('#modalMarcaEdit').on('hide.bs.modal', function(event) {
-            document.getElementById('idMarcaEdit').value = '';
+        $('#modalCategoriaEdit').on('hide.bs.modal', function(event) {
+            document.getElementById('idCategoriaEdit').value = '';
             document.getElementById('labelImagemEdit').innerHTML = '';
             document.getElementById('arquivoEdit').value = '';
             document.getElementById('PreviewImageEdit').src = '';
         })
 
-        $('#modalMarcaShow').on('hide.bs.modal', function(event) {
-            document.getElementById('idMarcaShow').value = '';
+        $('#modalCategoriaShow').on('hide.bs.modal', function(event) {
+            document.getElementById('idCategoriaShow').value = '';
             document.getElementById('PreviewImageShow').src = '';
         })
 

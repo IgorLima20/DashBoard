@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Marca;
-use Illuminate\Http\Request;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
-class MarcaController extends Controller
+class CategoriaController extends Controller
 {
+    public $categoria;
 
-    public $marca;
-
-    public function __construct(Marca $marca) {
-        $this->marca = $marca;
+    public function __construct(Categoria $categoria) {
+        $this->categoria = $categoria;
     }
 
     /**
@@ -23,7 +21,7 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        return view('marca.index');
+        return view('categoria.index');
     }
 
     /**
@@ -34,42 +32,53 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->marca->rules(), $this->marca->feedback());
+        $request->validate($this->categoria->rules(), $this->categoria->feedback());
 
-        $marca = new Marca;
-        $marca->marca = $request->marca;
+        $categoria = new Categoria;
+        $categoria->categoria = $request->categoria;
 
         $imagem = $request->file('imagem');
         if ($imagem) {
-            $imagem_urn = $imagem->store('imagens/marcas', 'public');
-            $marca->imagem = $imagem_urn;
+            $imagem_urn = $imagem->store('imagens/categorias', 'public');
+            $categoria->imagem = $imagem_urn;
         }
         
-        $marca->save();
-        return response()->json(['marca' => $marca, 'msg' => 'Marca Criada com Sucesso!!'], 201);
+        $categoria->save();
+        return response()->json(['categoria' => $categoria, 'msg' => 'Categoria Criada com Sucesso!!'], 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Marca  $marca
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Marca $marca)
+    public function show(Categoria $categorium)
     {
-        return response()->json(['marca' => $marca], 200);
+        return response()->json(['categoria' => $categorium], 200);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Categoria  $categoria
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Categoria $categorium)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Marca  $marca
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Marca $marca)
+    public function update(Request $request, Categoria $categorium)
     {
-        if($marca === null) {
+        if($categorium === null) {
             return response()->json(['erro' => 'Impossível realizar a atualização. O recurso solicitado não existe'], 404);
         }
 
@@ -78,7 +87,7 @@ class MarcaController extends Controller
             $regrasDinamicas = array();
 
             //percorrendo todas as regras definidas no Model
-            foreach($marca->rules() as $input => $regra) {
+            foreach($categorium->rules() as $input => $regra) {
                 
                 //coletar apenas as regras aplicáveis aos parâmetros parciais da requisição PATCH
                 if(array_key_exists($input, $request->all())) {
@@ -86,55 +95,55 @@ class MarcaController extends Controller
                 }
             }
             
-            $request->validate($regrasDinamicas, $marca->feedback());
+            $request->validate($regrasDinamicas, $categorium->feedback());
 
         } else {
-            $request->validate($marca->rules(), $marca->feedback());
+            $request->validate($categorium->rules(), $categorium->feedback());
         }
 
         //preenchendo o objeto marca com todos os dados do request
-        $marca->fill($request->all());
+        $categorium->fill($request->all());
 
         if ($request->file('imagem')) {
-            Storage::disk('public')->delete($marca->imagem);
+            Storage::disk('public')->delete($categorium->imagem);
             $imagem = $request->file('imagem');
             $imagem_urn = $imagem->store('imagens/categorias', 'public');
-            $marca->imagem = $imagem_urn;
+            $categorium->imagem = $imagem_urn;
         }
 
-        $marca->save();
-        return response()->json(['marca' => $marca, 'msg' => 'Marca Editada com Sucesso!!'], 200);
+        $categorium->save();
+        return response()->json(['marca' => $categorium, 'msg' => 'Categoria Editada com Sucesso!!'], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Marca  $marca
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Marca $marca)
+    public function destroy(Categoria $categorium)
     {
-        if($marca === null) {
+        if($categorium === null) {
             return response()->json(['erro' => 'Impossível realizar a exclusão. O recurso solicitado não existe'], 404);
         }
 
         //remove o arquivo antigo
-        Storage::disk('public')->delete($marca->imagem);        
+        Storage::disk('public')->delete($categorium->imagem);        
 
-        $marca->delete();
-        return response()->json(['msg' => 'Marca Removida com Sucesso!!'], 200);
+        $categorium->delete();
+        return response()->json(['msg' => 'Categoria Removida com Sucesso!!'], 200);
     }
 
     public function carregarTabela(Request $request)
     {
         if ($request->search) {
             return response()->json([
-                'marca' =>  $this->marca::where('marca', 'LIKE', "%{$request->search}%")->paginate(10),
+                'categoria' =>  $this->categoria::where('categoria', 'LIKE', "%{$request->search}%")->paginate(10),
                 'search' => $request->search
             ], 200);
         } else {
             return response()->json([
-                'marca' => $this->marca::paginate(10)
+                'categoria' => $this->categoria::paginate(10)
             ], 200);
         }
     }
